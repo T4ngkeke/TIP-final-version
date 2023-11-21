@@ -22,19 +22,19 @@ torch.cuda.empty_cache()
 def outputCSV(folder_path, output_csv, data_list):
     files = os.listdir(folder_path)
     with open(output_csv, 'w', newline='') as csvfile:
-        # 创建 CSV writer，指定分隔符为逗号
+        
         csv_writer = csv.writer(csvfile, delimiter=',')
-        # 写入 CSV 文件的标题（假设为 "image_path" 和 "label"）
+       
         csv_writer.writerow(['image_name', 'target'])
-        # 遍历文件夹中的文件并将文件名（去掉后缀）和列表元素写入 CSV 文件
+        
         for file in files:
-            # 使用 os.path.splitext 获取文件名和扩展名
+           
             file_name, file_extension = os.path.splitext(file)
-            # 检查文件扩展名是否为 '.jpg'
+            
             if file_extension.lower() == '.jpg':
-                # 获取列表元素，如果列表为空或长度不够，则使用默认值 0
+                
                 label = data_list.pop(0) if data_list else 0
-                # 将文件名（去掉后缀）和列表元素写入 CSV 文件的一行
+                
                 csv_writer.writerow([file_name, label])
 
 
@@ -213,26 +213,5 @@ for i in range(epoch):
     # save trained model
     torch.save(model,"model_{}.pth".format(i))
     print("Model saved...")
-
-
-'''
-# start testing
-
-print("---------------start testing-----------------")
-with torch.no_grad():    #ensure this data would not be optimized
-    for _,data in enumerate(testDataloader):
-        imgs,_=data
-        imgs=imgs.to(device)
-        #print(testDataloader)
-        outputs=model(imgs.float())
-        outputs_np=outputs.cpu().numpy()
-        #Decide the prediction of outputs --[predict probability of each class]
-        x_predict=np.argmax(outputs_np,axis=1)
-        x_predict=x_predict.tolist()
-        finalResult.extend(x_predict)
-resultCSV='result.csv'
-
-outputCSV(testFolder,resultCSV,finalResult)
-'''
 
 writer.close()
