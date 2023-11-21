@@ -54,7 +54,7 @@ class MyNewDataset(Dataset):
         return imgs,label
 
 #load model
-model = torch.load('model_9.pth')
+model = torch.load('model_7.pth')
 print(model)
 # Put the model in evaluation mode
 #model.eval()
