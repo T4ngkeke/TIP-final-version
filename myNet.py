@@ -131,7 +131,7 @@ testDataloader=DataLoader(dataset=myTestData,
                         drop_last=False)
 
 #Rounds for training
-epoch=40
+epoch=8
 
 #data visualize: TensorBoard
 writer=SummaryWriter("./logs_myDataset")
